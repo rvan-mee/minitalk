@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_atoi.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rvan-mee <rvan-mee@student.codam.nl>         +#+                     */
+/*   By: rvan-mee <rvan-mee@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/05 13:11:10 by rvan-mee      #+#    #+#                 */
-/*   Updated: 2022/03/05 13:11:12 by rvan-mee      ########   odam.nl         */
+/*   Updated: 2022/04/12 14:19:40 by rvan-mee      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	ft_atoi(const char *nptr)
 
 	c = 0;
 	value = 1;
-	while (*nptr != '\0' && ft_isspace(*nptr))
-		nptr++;
 	if (*nptr == '-' || *nptr == '+')
 	{
 		if (*nptr == '-')
@@ -34,5 +32,7 @@ int	ft_atoi(const char *nptr)
 		c += *nptr - 48;
 		nptr++;
 	}
+	if (*nptr != '\0')
+		exit_with_error("Please use a correct PID\n");
 	return ((int) c * value);
 }
