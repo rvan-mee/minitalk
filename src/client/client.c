@@ -6,7 +6,7 @@
 /*   By: rvan-mee <rvan-mee@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/12 10:47:49 by rvan-mee      #+#    #+#                 */
-/*   Updated: 2022/04/12 19:43:52 by rvan-mee      ########   odam.nl         */
+/*   Updated: 2022/04/13 20:31:18 by rvan-mee      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@
 
 int	g_breakout = 0;
 
+// Shifts c by shift amount and then returns the bit
+// at that position.
 int	get_bit_of_byte(unsigned int c, int shift)
 {
 	return (c >> shift & 1);
 }
 
+// Used to set the global breakout value
+// to 1, indicating a recieved signal.
 void	got_signal(int sig)
 {
 	if (sig == SIGUSR2)
 		g_breakout = 1;
 }
 
+// Splits the given byte using get_bit_of_byte()
+// in a while loop, sending 1 bit per time to the given PID.
+// After sending a bit it will wait for confirmation. 
 void	send_byte(char byte, int pid)
 {
 	int	shift;
@@ -47,12 +54,15 @@ void	send_byte(char byte, int pid)
 		while (1)
 		{
 			if (g_breakout == 1)
-				break;
+				break ;
 		}
 		g_breakout = 0;
 	}
 }
 
+// Takes a PID and a string as input.
+// Tries to send each byte of the string over
+// using send_byte.
 int	main(int argc, char **argv)
 {
 	pid_t			pid;
