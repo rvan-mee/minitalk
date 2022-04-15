@@ -56,7 +56,7 @@ CFLAGS = -Wall -Wextra -Werror
 ## 		-fsanitize=address -g
 CC = gcc
 
-all: $(NAME)
+libft: $(NAME)
 
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -72,6 +72,6 @@ fclean: clean
 	@echo cleaning libft .a files
 	@rm -f libft.a
 
-re: fclean all
+re: fclean libft
 
 .PHONY:	all bonus clean fclean re
