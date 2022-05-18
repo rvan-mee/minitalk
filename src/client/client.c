@@ -6,7 +6,7 @@
 /*   By: rvan-mee <rvan-mee@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/04/12 10:47:49 by rvan-mee      #+#    #+#                 */
-/*   Updated: 2022/04/13 20:31:18 by rvan-mee      ########   odam.nl         */
+/*   Updated: 2022/05/18 17:38:10 by rvan-mee      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	send_byte(char byte, int pid)
 			return_check = kill(pid, SIGUSR1);
 		else
 			return_check = kill(pid, SIGUSR2);
+		if (return_check != 0)
+			exit_with_error("Please use the right PID\n");
 		shift--;
 		signal(SIGUSR2, got_signal);
 		while (1)
